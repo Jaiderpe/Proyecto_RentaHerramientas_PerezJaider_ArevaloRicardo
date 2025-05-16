@@ -7,8 +7,7 @@ import lombok.*;
 @Entity
 @Table(name = "herramienta_categoria")
 @IdClass(HerramientaCategoriaId.class)
-@Getter
-@Setter
+@Getter @Setter
 public class HerramientaCategoria {
 
     @Id
