@@ -5,24 +5,18 @@ import lombok.*;
 
 @Entity
 @Table(name = "imagenes_herramienta")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter @Setter
+@EqualsAndHashCode(of = "idImagen")
 public class ImagenHerramienta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_imagen")
     private Integer idImagen;
 
     @ManyToOne
-    @JoinColumn(name = "id_herramienta", nullable = false)
+    @JoinColumn(name = "id_herramienta")
     private Herramienta herramienta;
 
-    @Column(name = "url_imagen", columnDefinition = "TEXT")
     private String urlImagen;
-
-    @Column(name = "principal")
     private Boolean principal = false;
 }

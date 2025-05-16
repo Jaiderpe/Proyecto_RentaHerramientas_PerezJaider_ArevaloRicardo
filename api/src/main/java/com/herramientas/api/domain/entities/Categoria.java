@@ -5,16 +5,12 @@ import lombok.*;
 
 @Entity
 @Table(name = "categorias")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter @Setter
+@EqualsAndHashCode(of = "idCategoria")
 public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_categoria")
     private Integer idCategoria;
-
     private String nombre;
 }

@@ -5,17 +5,12 @@ import lombok.*;
 
 @Entity
 @Table(name = "tipos_documento")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter @Setter
+@EqualsAndHashCode(of = "idTipoDocumento")
 public class TipoDocumento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_tipo_documento")
     private Integer idTipoDocumento;
-
-    @Column(nullable = false)
     private String nombre;
 }

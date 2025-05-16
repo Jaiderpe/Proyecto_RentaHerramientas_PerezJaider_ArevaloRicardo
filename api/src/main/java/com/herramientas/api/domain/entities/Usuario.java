@@ -2,32 +2,30 @@ package com.herramientas.api.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "usuarios")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter @Setter
+@EqualsAndHashCode(exclude = "roles")
+@ToString(exclude = "roles")
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
     private Integer idUsuario;
 
     private String nombre;
     private String email;
     private String password;
 
-    @Column(name = "id_tipo_documento")
-    private Integer idTipoDocumento;
+    @ManyToOne
+    @JoinColumn(name = "id_tipo_documento")
+    private TipoDocumento tipoDocumento;  // Relación con tipos_documento
 
-    @Column(name = "numero_documento")
     private String numeroDocumento;
-
     private String telefono;
     private String direccion;
     private Boolean activo = true;

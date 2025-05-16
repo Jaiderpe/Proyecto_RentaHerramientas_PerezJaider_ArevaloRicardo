@@ -5,17 +5,12 @@ import lombok.*;
 
 @Entity
 @Table(name = "roles")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter @Setter
+@EqualsAndHashCode(of = "idRol")
 public class Rol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_rol")
     private Integer idRol;
-
-    @Column(nullable = false)
     private String nombre;
 }

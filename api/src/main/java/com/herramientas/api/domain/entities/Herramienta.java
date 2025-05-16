@@ -3,29 +3,29 @@ package com.herramientas.api.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
+import com.herramientas.api.infrastructure.utils.Audit;
+
 @Entity
 @Table(name = "herramientas")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter @Setter
 public class Herramienta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_herramienta")
     private Integer idHerramienta;
 
     private String nombre;
     private String descripcion;
-    private Double precioPorDia;
-
-    @Column(name = "disponible")
+    private BigDecimal precioPorDia;
     private Boolean disponible = true;
-
     private String estado;
 
     @ManyToOne
     @JoinColumn(name = "id_proveedor")
     private Usuario proveedor;
+
+    @Embedded
+    private Audit audit = new Audit(); // <-- Aquí añadimos la auditoría
 }
