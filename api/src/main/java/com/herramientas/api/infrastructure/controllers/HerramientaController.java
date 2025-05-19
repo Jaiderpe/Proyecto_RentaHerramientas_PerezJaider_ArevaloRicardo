@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/herramientas")
+@RequestMapping("/api/herramientas")
 public class HerramientaController {
 
     @Autowired
