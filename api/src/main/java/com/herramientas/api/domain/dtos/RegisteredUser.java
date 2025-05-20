@@ -1,6 +1,8 @@
 package com.herramientas.api.domain.dtos;
 
-public class RegisteredUsuario {
+import java.io.Serializable;
+
+public class RegisteredUser implements Serializable {
     private Long id;
     private String username;
     private String name;
