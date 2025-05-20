@@ -1,6 +1,8 @@
 package com.herramientas.api.domain.dtos;
 
-public class AuthenticationResponse {
+import java.io.Serializable;
+
+public class AuthenticationResponse implements Serializable {
     private String jwt;
 
     public String getjwt(){

@@ -13,9 +13,12 @@ import org.springframework.stereotype.Service;
 import com.herramientas.api.application.services.UserService;
 import com.herramientas.api.domain.dtos.AuthenticationRequest;
 import com.herramientas.api.domain.dtos.AuthenticationResponse;
-import com.herramientas.api.domain.dtos.RegisteredUsuario;
+import com.herramientas.api.domain.dtos.RegisterRequest;
+import com.herramientas.api.domain.dtos.RegisteredUser;
 import com.herramientas.api.domain.dtos.SaveUser;
 import com.herramientas.api.domain.entities.User;
+
+import jakarta.validation.Valid;
 
 @Service
 public class AuthenticationService {
@@ -28,10 +31,10 @@ public class AuthenticationService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public RegisteredUsuario registerOneCustomer(SaveUser newUser) {
+    public RegisteredUser registerOneCustomer(SaveUser newUser) {
         User user = userService.registrOneCustomer(newUser);
 
-        RegisteredUsuario userDto = new RegisteredUsuario();
+        RegisteredUser userDto = new RegisteredUser();
         userDto.setId(user.getId());
         userDto.setName(user.getName());
         userDto.setUsername(user.getUsername());

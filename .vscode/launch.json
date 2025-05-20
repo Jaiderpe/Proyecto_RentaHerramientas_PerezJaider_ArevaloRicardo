@@ -9,6 +9,16 @@
             "projectName": "api",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ApiApplication<electro-app>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.herramientas.api.ApiApplication",
+            "projectName": "electro-app",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

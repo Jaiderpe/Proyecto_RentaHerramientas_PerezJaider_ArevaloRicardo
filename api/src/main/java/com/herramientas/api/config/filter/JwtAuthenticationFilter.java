@@ -10,7 +10,7 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -29,37 +29,43 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
     private UserService userService;
 
     @Override
-    protected void doFilterInternal(@SuppressWarnings("null") HttpServletRequest request, @SuppressWarnings("null") HttpServletResponse response, @SuppressWarnings("null") FilterChain filterChain) throws ServletException, IOException {
+protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+        throws ServletException, IOException {
 
-        System.out.println("ENTRO EN EL FILTRO JWT AUTHENTICATION FILTER");
+    if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        response.setHeader("Access-Control-Allow-Headers", "*");
+        response.setStatus(HttpServletResponse.SC_OK);
+        return;
+    }
 
-        //1. Obtener encabezado http llamado Authorization
-        String authorizationHeader = request.getHeader("Authorization");//Bearer jwt
-        if(!StringUtils.hasText(authorizationHeader) || !authorizationHeader.startsWith("Bearer ")){
-            filterChain.doFilter(request, response);
-            return;
-        }
+    System.out.println("ENTRO EN EL FILTRO JWT AUTHENTICATION FILTER");
 
-        //2. Obtener token JWT desde el encabezado
+    String authorizationHeader = request.getHeader("Authorization");
+
+    if (!StringUtils.hasText(authorizationHeader) || !authorizationHeader.startsWith("Bearer ")) {
+        filterChain.doFilter(request, response);
+        return;
+    }
+
+    try {
         String jwt = authorizationHeader.split(" ")[1];
-
-        //3. Obtener el subject/username desde el token
-        // esta accion a su vez valida el formato del token, firma y fecha de expiración
         String username = jwtService.extractUsername(jwt);
-
-        //4. Setear objeto authentication dentro de security context holder
 
         User user = userService.findOneByUsername(username)
                 .orElseThrow(() -> new ObjectNotFoundException("User not found. Username: " + username));
 
-        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                 username, null, user.getAuthorities()
         );
-        authToken.setDetails(new WebAuthenticationDetails(request));
-        SecurityContextHolder.getContext().setAuthentication(authToken);
+        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        //5. Ejecutar el registro de filtros
         filterChain.doFilter(request, response);
 
+    } catch (Exception ex) {
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid or expired token");
     }
+}
 }
