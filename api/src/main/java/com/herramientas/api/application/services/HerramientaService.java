@@ -1,7 +1,8 @@
 package com.herramientas.api.application.services;
 
-import com.herramientas.api.domain.entities.Herramienta;
-import com.herramientas.api.infrastructure.repositories.HerramientaRepository;
+import com.herramientas.api.persistence.entity.Herramienta;
+import com.herramientas.api.persistence.repositories.HerramientaRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

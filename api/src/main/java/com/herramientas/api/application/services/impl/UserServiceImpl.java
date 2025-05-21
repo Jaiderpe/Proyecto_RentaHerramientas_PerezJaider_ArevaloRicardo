@@ -8,11 +8,11 @@ import org.springframework.util.StringUtils;
 import java.util.Optional;
 
 import com.herramientas.api.application.services.UserService;
-import com.herramientas.api.domain.dtos.SaveUser;
-import com.herramientas.api.domain.entities.User;
+import com.herramientas.api.dto.SaveUser;
 import com.herramientas.api.exception.InvalidPasswordException;
-import com.herramientas.api.infrastructure.repositories.UserRepository;
-import com.herramientas.api.infrastructure.utils.Role;
+import com.herramientas.api.persistence.entity.User;
+import com.herramientas.api.persistence.repositories.UserRepository;
+import com.herramientas.api.persistence.utils.Role;
 
 @Service
 public class UserServiceImpl implements UserService {

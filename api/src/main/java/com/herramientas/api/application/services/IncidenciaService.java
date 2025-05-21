@@ -1,7 +1,8 @@
 package com.herramientas.api.application.services;
 
-import com.herramientas.api.domain.entities.Incidencia;
-import com.herramientas.api.infrastructure.repositories.IncidenciaRepository;
+import com.herramientas.api.persistence.entity.Incidencia;
+import com.herramientas.api.persistence.repositories.IncidenciaRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

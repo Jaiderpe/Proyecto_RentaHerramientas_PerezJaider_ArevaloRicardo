@@ -1,7 +1,8 @@
 package com.herramientas.api.application.services;
 
-import com.herramientas.api.domain.entities.ReporteGenerado;
-import com.herramientas.api.infrastructure.repositories.ReporteGeneradoRepository;
+import com.herramientas.api.persistence.entity.ReporteGenerado;
+import com.herramientas.api.persistence.repositories.ReporteGeneradoRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

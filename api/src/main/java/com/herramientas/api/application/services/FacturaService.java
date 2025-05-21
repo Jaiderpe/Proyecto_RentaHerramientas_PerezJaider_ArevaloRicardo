@@ -1,7 +1,8 @@
 package com.herramientas.api.application.services;
 
-import com.herramientas.api.domain.entities.Factura;
-import com.herramientas.api.infrastructure.repositories.FacturaRepository;
+import com.herramientas.api.persistence.entity.Factura;
+import com.herramientas.api.persistence.repositories.FacturaRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

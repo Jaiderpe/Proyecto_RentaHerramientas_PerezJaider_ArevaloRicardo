@@ -1,7 +1,8 @@
 package com.herramientas.api.application.services;
 
-import com.herramientas.api.domain.entities.TipoDocumento;
-import com.herramientas.api.infrastructure.repositories.TipoDocumentoRepository;
+import com.herramientas.api.persistence.entity.TipoDocumento;
+import com.herramientas.api.persistence.repositories.TipoDocumentoRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

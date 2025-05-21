@@ -17,8 +17,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.herramientas.api.application.services.UserService;
 import com.herramientas.api.application.services.auth.JwtService;
-import com.herramientas.api.domain.entities.User;
 import com.herramientas.api.exception.ObjectNotFoundException;
+import com.herramientas.api.persistence.entity.User;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter{

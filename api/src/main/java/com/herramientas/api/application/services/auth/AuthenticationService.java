@@ -11,11 +11,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.herramientas.api.application.services.UserService;
-import com.herramientas.api.domain.dtos.AuthenticationRequest;
-import com.herramientas.api.domain.dtos.AuthenticationResponse;
-import com.herramientas.api.domain.dtos.RegisteredUser;
-import com.herramientas.api.domain.dtos.SaveUser;
-import com.herramientas.api.domain.entities.User;
+import com.herramientas.api.dto.AuthenticationRequest;
+import com.herramientas.api.dto.AuthenticationResponse;
+import com.herramientas.api.dto.RegisteredUser;
+import com.herramientas.api.dto.SaveUser;
+import com.herramientas.api.persistence.entity.User;
 
 @Service
 public class AuthenticationService {
