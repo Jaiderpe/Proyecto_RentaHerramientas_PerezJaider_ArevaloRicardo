@@ -13,12 +13,9 @@ import org.springframework.stereotype.Service;
 import com.herramientas.api.application.services.UserService;
 import com.herramientas.api.domain.dtos.AuthenticationRequest;
 import com.herramientas.api.domain.dtos.AuthenticationResponse;
-import com.herramientas.api.domain.dtos.RegisterRequest;
 import com.herramientas.api.domain.dtos.RegisteredUser;
 import com.herramientas.api.domain.dtos.SaveUser;
 import com.herramientas.api.domain.entities.User;
-
-import jakarta.validation.Valid;
 
 @Service
 public class AuthenticationService {
@@ -33,22 +30,23 @@ public class AuthenticationService {
 
     public RegisteredUser registerOneCustomer(SaveUser newUser) {
         User user = userService.registrOneCustomer(newUser);
-
+    
         RegisteredUser userDto = new RegisteredUser();
         userDto.setId(user.getId());
-        userDto.setName(user.getName());
-        userDto.setUsername(user.getUsername());
+        userDto.setFirstName(user.getFirstName());
+        userDto.setLastName(user.getLastName());
+        userDto.setEmail(user.getEmail());
         userDto.setRole(user.getRole().name());
-
+    
         String jwt = jwtService.generateToken(user, generateExtraClaims(user));
         userDto.setJwt(jwt);
-
+    
         return userDto;
     }
 
     private Map<String, Object> generateExtraClaims(User user) {
         Map<String, Object> extraClaims = new HashMap<>();
-        extraClaims.put("name",user.getName());
+        extraClaims.put("name",user.getFirstName());
         extraClaims.put("role",user.getRole().name());
         extraClaims.put("authorities",user.getAuthorities());
 

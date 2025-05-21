@@ -28,8 +28,10 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(unique = true)
-    private String username;
-    private String name;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phone;
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -44,10 +46,6 @@ public class User implements UserDetails {
         return role.getPermissions().stream()
                 .map(each -> each.name())
                 .map(each -> new SimpleGrantedAuthority(each))
-//                .map(each -> {
-//                    String permission = each.name();
-//                    return new SimpleGrantedAuthority(permission);
-//                })
                 .collect(Collectors.toList());
 
     }
@@ -59,7 +57,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email; // Ahora usamos email como username
     }
 
     @Override
@@ -82,6 +80,8 @@ public class User implements UserDetails {
         return true;
     }
 
+    // --- Getters & Setters ---
+
     public Long getId() {
         return id;
     }
@@ -90,16 +90,36 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getName() {
-        return name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public void setPassword(String password) {
