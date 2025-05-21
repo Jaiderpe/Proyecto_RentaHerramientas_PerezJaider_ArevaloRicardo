@@ -2,31 +2,54 @@ package com.herramientas.api.domain.dtos;
 
 import java.io.Serializable;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class SaveUser implements Serializable{
-    @Size(min = 4)
-    private String name;
-    private String username;
-    @Size(min = 8)
+    @NotBlank
+    private String firstName;
+    
+    @NotBlank
+    private String lastName;
+    
+    @Email
+    @NotBlank
+    private String email;
+    
+    @NotBlank
+    @Size(min = 8, max = 20)
     private String password;
-    @Size(min = 8)
+    
+    @NotBlank
     private String repeatedPassword;
+    
+    @Pattern(regexp = "^[+]?[0-9]{10,15}$")
+    private String phone;
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -45,4 +68,13 @@ public class SaveUser implements Serializable{
         this.repeatedPassword = repeatedPassword;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    
 }
