@@ -1,7 +1,8 @@
 package com.herramientas.api.application.services;
 
-import com.herramientas.api.domain.entities.Usuario;
-import com.herramientas.api.infrastructure.repositories.UsuarioRepository;
+import com.herramientas.api.persistence.entity.Usuario;
+import com.herramientas.api.persistence.repositories.UsuarioRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

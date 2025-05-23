@@ -7,11 +7,8 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
-
 import java.util.Date;
 import java.util.Map;
-
 import javax.crypto.SecretKey;
 
 @Service
@@ -23,27 +20,22 @@ public class JwtService {
     private String SECRET_KEY;
 
     public String generateToken(UserDetails user, Map<String, Object> extraClaims) {
-
         Date issuedAt = new Date(System.currentTimeMillis());
-        Date expiration = new Date( (EXPIRATION_IN_MINUTES * 60 * 1000) + issuedAt.getTime() );
-        String jwt = Jwts.builder()
+        Date expiration = new Date((EXPIRATION_IN_MINUTES * 60 * 1000) + issuedAt.getTime());
+        return Jwts.builder()
                 .header()
                     .type("JWT")
                     .and()
-                
                 .subject(user.getUsername())
                 .claims(extraClaims)
                 .issuedAt(issuedAt)
                 .expiration(expiration)
                 .signWith(generateKey(), Jwts.SIG.HS256)
                 .compact();
-
-        return jwt;
     }
 
     private SecretKey generateKey() {
         byte[] passwordDecoded = Decoders.BASE64.decode(SECRET_KEY);
-        System.out.println( new String(passwordDecoded) );
         return Keys.hmacShaKeyFor(passwordDecoded);
     }
 
@@ -52,7 +44,10 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String jwt) {
-        return Jwts.parser().verifyWith( generateKey() ).build()
-                .parseSignedClaims(jwt).getPayload();
+        return Jwts.parser()
+                .verifyWith(generateKey())
+                .build()
+                .parseSignedClaims(jwt)
+                .getPayload();
     }
 }

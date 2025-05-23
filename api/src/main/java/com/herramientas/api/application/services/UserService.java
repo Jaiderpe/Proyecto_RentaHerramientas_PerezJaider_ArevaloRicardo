@@ -1,12 +1,12 @@
 package com.herramientas.api.application.services;
 
+import java.util.List;
 import java.util.Optional;
-
-import com.herramientas.api.domain.dtos.SaveUser;
-import com.herramientas.api.domain.entities.User;
+import com.herramientas.api.dto.SaveUser;
+import com.herramientas.api.persistence.entity.User;
 
 public interface UserService {
     User registrOneCustomer(SaveUser newUser);
-
     Optional<User> findOneByUsername(String username);
+    List<User> findAll();
 }

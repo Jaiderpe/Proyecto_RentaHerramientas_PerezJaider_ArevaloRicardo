@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.herramientas.api.exception.ObjectNotFoundException;
-import com.herramientas.api.infrastructure.repositories.UserRepository;
+import com.herramientas.api.persistence.repositories.UserRepository;
 
 
 @Configuration

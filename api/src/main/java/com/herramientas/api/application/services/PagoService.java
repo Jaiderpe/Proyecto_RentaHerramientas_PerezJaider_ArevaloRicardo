@@ -1,7 +1,8 @@
 package com.herramientas.api.application.services;
 
-import com.herramientas.api.domain.entities.Pago;
-import com.herramientas.api.infrastructure.repositories.PagoRepository;
+import com.herramientas.api.persistence.entity.Pago;
+import com.herramientas.api.persistence.repositories.PagoRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

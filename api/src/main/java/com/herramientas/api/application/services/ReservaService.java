@@ -1,7 +1,8 @@
 package com.herramientas.api.application.services;
 
-import com.herramientas.api.domain.entities.Reserva;
-import com.herramientas.api.infrastructure.repositories.ReservaRepository;
+import com.herramientas.api.persistence.entity.Reserva;
+import com.herramientas.api.persistence.repositories.ReservaRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

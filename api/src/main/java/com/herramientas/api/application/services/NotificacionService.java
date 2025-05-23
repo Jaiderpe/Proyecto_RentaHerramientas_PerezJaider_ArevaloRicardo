@@ -1,7 +1,8 @@
 package com.herramientas.api.application.services;
 
-import com.herramientas.api.domain.entities.Notificacion;
-import com.herramientas.api.infrastructure.repositories.NotificacionRepository;
+import com.herramientas.api.persistence.entity.Notificacion;
+import com.herramientas.api.persistence.repositories.NotificacionRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

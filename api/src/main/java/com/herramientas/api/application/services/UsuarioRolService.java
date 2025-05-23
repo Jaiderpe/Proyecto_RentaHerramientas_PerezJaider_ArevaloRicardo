@@ -1,7 +1,8 @@
 package com.herramientas.api.application.services;
 
-import com.herramientas.api.domain.entities.UsuarioRol;
-import com.herramientas.api.infrastructure.repositories.UsuarioRolRepository;
+import com.herramientas.api.persistence.entity.UsuarioRol;
+import com.herramientas.api.persistence.repositories.UsuarioRolRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
