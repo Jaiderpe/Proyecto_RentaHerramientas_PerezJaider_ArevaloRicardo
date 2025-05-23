@@ -1,32 +1,31 @@
 package com.herramientas.api.dto;
 
+import jakarta.validation.constraints.*;
 import java.io.Serializable;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+public class SaveUser implements Serializable {
 
-public class SaveUser implements Serializable{
-    @NotBlank
+    @NotBlank(message = "Nombre es requerido")
     private String firstName;
-    
-    @NotBlank
+
+    @NotBlank(message = "Apellido es requerido")
     private String lastName;
-    
-    @Email
-    @NotBlank
+
+    @Email(message = "Correo inválido")
+    @NotBlank(message = "Correo es requerido")
     private String email;
-    
-    @NotBlank
-    @Size(min = 8, max = 20)
+
+    @NotBlank(message = "Contraseña es requerida")
+    @Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres")
     private String password;
-    
-    @NotBlank
+
+    @NotBlank(message = "Repetir contraseña es requerido")
     private String repeatedPassword;
-    
-    @Pattern(regexp = "^[+]?[0-9]{10,15}$")
+
+    @Pattern(regexp = "^[+]?[0-9]{10,15}$", message = "Teléfono no válido")
     private String phone;
+
+    private String role; // Opcional, por defecto ROLE_CUSTOMER
 
     public String getFirstName() {
         return firstName;
@@ -74,6 +73,14 @@ public class SaveUser implements Serializable{
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     
