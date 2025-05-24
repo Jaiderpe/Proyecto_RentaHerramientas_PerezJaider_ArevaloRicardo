@@ -21,11 +21,12 @@ public class Herramienta {
     private BigDecimal precioPorDia;
     private Boolean disponible = true;
     private String estado;
+    private String imagenUrl;
 
     @ManyToOne
     @JoinColumn(name = "id_proveedor")
     private Usuario proveedor;
 
     @Embedded
-    private Audit audit = new Audit(); // <-- Aquí añadimos la auditoría
+    private Audit audit = new Audit(); 
 }

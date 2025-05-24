@@ -14,4 +14,5 @@ public class HerramientaDTO {
     private Boolean disponible;
     private String estado;
     private Integer idProveedor;
+    private String imagenUrl;
 }

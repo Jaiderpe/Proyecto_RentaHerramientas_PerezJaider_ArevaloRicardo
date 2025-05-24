@@ -22,7 +22,7 @@ public class SaveUser implements Serializable {
     @NotBlank(message = "Repetir contraseña es requerido")
     private String repeatedPassword;
 
-    @Pattern(regexp = "^[+]?[0-9]{10,15}$", message = "Teléfono no válido")
+    
     private String phone;
 
     private String role; // Opcional, por defecto ROLE_CUSTOMER

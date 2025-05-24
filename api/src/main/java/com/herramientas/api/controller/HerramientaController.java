@@ -24,6 +24,7 @@ public class HerramientaController {
     public Herramienta createHerramienta(@RequestBody Herramienta herramienta) {
         return herramientaService.save(herramienta);
     }
+    
 
     @DeleteMapping("/{id}")
     public void deleteHerramienta(@PathVariable Integer id) {
