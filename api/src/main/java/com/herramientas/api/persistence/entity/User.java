@@ -1,6 +1,7 @@
 package com.herramientas.api.persistence.entity;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -16,6 +17,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -37,18 +39,21 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToMany(mappedBy = "proveedor")
+    private List<Herramienta> herramientas;  // Lista de herramientas del proveedor
+
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(role == null) return null;
+public Collection<? extends GrantedAuthority> getAuthorities() {
+    List<GrantedAuthority> authorities = role.getPermissions().stream()
+        .map(perm -> new SimpleGrantedAuthority(perm.name()))
+        .collect(Collectors.toList());
 
-        if(role.getPermissions() == null) return null;
+    // Agregar el rol como autoridad explícita (importante para @PreAuthorize("hasRole(...)"))
+    authorities.add(new SimpleGrantedAuthority(role.name()));
 
-        return role.getPermissions().stream()
-                .map(each -> each.name())
-                .map(each -> new SimpleGrantedAuthority(each))
-                .collect(Collectors.toList());
+    return authorities;
+}
 
-    }
 
     @Override
     public String getPassword() {
@@ -57,7 +62,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email; // Ahora usamos email como username
+        return email; 
     }
 
     @Override

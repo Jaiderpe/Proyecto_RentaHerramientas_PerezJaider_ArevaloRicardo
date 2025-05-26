@@ -13,5 +13,6 @@ public class HerramientaDTO {
     private Double precioPorDia;
     private Boolean disponible;
     private String estado;
-    private Integer idProveedor;
+    private Long idProveedor;
+    private String imagenUrl;
 }

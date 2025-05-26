@@ -1,6 +1,7 @@
 package com.herramientas.api.application.services;
 
 import com.herramientas.api.persistence.entity.Herramienta;
+import com.herramientas.api.persistence.entity.User;
 import com.herramientas.api.persistence.repositories.HerramientaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,13 @@ public class HerramientaService {
 
     public void deleteById(Integer id) {
         herramientaRepository.deleteById(id);
+    }
+
+    public List<Herramienta> findByProveedor(User proveedor) {
+        return herramientaRepository.findByProveedor(proveedor);
+    }
+
+    public List<Herramienta> findByCategoria(Integer idCategoria) {
+        return herramientaRepository.findByCategorias_IdCategoria(idCategoria);
     }
 }
