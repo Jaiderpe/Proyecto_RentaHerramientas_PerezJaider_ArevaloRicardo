@@ -178,6 +178,7 @@ src/
 
 ## 📄 Licencia
 
+https://github.com/RicardoArevaloB/Frontend_RentaHerramientas_PerezJaider_ArevaloRicardo
 MIT © [Adrián Pérez] - **[Contáctame](mailto:tuemail@ejemplo.com)**
 ```
 
