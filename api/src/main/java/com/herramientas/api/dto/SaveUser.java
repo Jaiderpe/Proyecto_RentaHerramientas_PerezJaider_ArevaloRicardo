@@ -25,7 +25,14 @@ public class SaveUser implements Serializable {
     
     private String phone;
 
-    private String role; // Opcional, por defecto ROLE_CUSTOMER
+    private String role; 
+
+    @AssertTrue(message = "Las contraseñas no coinciden")
+    public boolean isPasswordsMatch() {
+        return password != null && password.equals(repeatedPassword);
+    }
+
+    
 
     public String getFirstName() {
         return firstName;
@@ -75,8 +82,9 @@ public class SaveUser implements Serializable {
         this.phone = phone;
     }
 
+    // Asignar ROLE_CUSTOMER por defecto
     public String getRole() {
-        return role;
+        return (role == null) ? "ROLE_CUSTOMER" : role;
     }
 
     public void setRole(String role) {

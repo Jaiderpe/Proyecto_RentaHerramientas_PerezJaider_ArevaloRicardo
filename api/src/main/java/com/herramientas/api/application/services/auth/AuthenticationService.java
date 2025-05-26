@@ -3,12 +3,13 @@ package com.herramientas.api.application.services.auth;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
 import com.herramientas.api.application.services.UserService;
 import com.herramientas.api.dto.AuthenticationRequest;
 import com.herramientas.api.dto.AuthenticationResponse;
@@ -18,10 +19,13 @@ import com.herramientas.api.persistence.entity.User;
 
 @Service
 public class AuthenticationService {
+
     @Autowired
     private UserService userService;
+
     @Autowired
     private JwtService jwtService;
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -51,26 +55,33 @@ public class AuthenticationService {
                 autRequest.getUsername(), autRequest.getPassword()
         );
         authenticationManager.authenticate(authentication);
-        UserDetails user = userService.findOneByUsername(autRequest.getUsername()).get();
-        String jwt = jwtService.generateToken(user, generateExtraClaims((User) user));
+
+        User user = (User) userService.findOneByUsername(autRequest.getUsername()).get();
+
+        String jwt = jwtService.generateToken(user, generateExtraClaims(user));
+
         AuthenticationResponse authRsp = new AuthenticationResponse();
         authRsp.setJwt(jwt);
+        authRsp.setRole(user.getRole().name());
+        authRsp.setFirstName(user.getFirstName());
+        authRsp.setLastName(user.getLastName());
+
         return authRsp;
     }
 
     public List<RegisteredUser> getAllUsers() {
-    return userService.findAll().stream()
-            .map(user -> {
-                RegisteredUser dto = new RegisteredUser();
-                dto.setId(user.getId());
-                dto.setFirstName(user.getFirstName());
-                dto.setLastName(user.getLastName());
-                dto.setEmail(user.getEmail());
-                dto.setRole(user.getRole().name());
-                return dto;
-            })
-            .toList();
-}
+        return userService.findAll().stream()
+                .map(user -> {
+                    RegisteredUser dto = new RegisteredUser();
+                    dto.setId(user.getId());
+                    dto.setFirstName(user.getFirstName());
+                    dto.setLastName(user.getLastName());
+                    dto.setEmail(user.getEmail());
+                    dto.setRole(user.getRole().name());
+                    return dto;
+                })
+                .toList();
+    }
 
     public boolean validateToken(String jwt) {
         try {
