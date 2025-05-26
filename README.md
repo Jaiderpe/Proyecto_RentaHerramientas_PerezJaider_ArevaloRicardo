@@ -1,21 +1,95 @@
 # Proyecto_RentaHerramientas_PerezJaider_ArevaloRicardo
 
-```markdown
-# 🚀 Backend de ConstructTools - API de Alquiler de Herramientas
+`# **ConstructTools - Plataforma de Alquiler de Herramientas**  
 
-![Arquitectura Backend](docs/backend-architecture.png)
+## **📌 Resumen del Proyecto**  
+**ConstructTools** es una plataforma web diseñada para facilitar el alquiler de herramientas de construcción entre clientes y proveedores. El sistema cuenta con tres roles principales (**Cliente**, **Proveedor** y **Administrador**), cada uno con funcionalidades específicas para gestionar herramientas, reservas y pagos de manera eficiente.  
 
-API RESTful para el sistema de alquiler de herramientas con autenticación JWT, gestión de roles y permisos.
+---
 
-## 🌟 Características Clave
+## **✨ Características Principales**  
 
-- **Autenticación segura** con JWT y BCrypt
-- **Control de acceso basado en roles** (Admin, Proveedor, Cliente)
-- **API RESTful** siguiendo mejores prácticas
-- **Manejo centralizado de errores**
-- **Validación de datos** en endpoints
+### **🔐 Autenticación y Seguridad**  
+- **Registro y login** con validación de datos y contraseñas encriptadas.  
+- **Tokens JWT** para mantener sesiones seguras.  
+- **Control de acceso basado en roles** (permisos específicos para cada tipo de usuario).  
 
-## 🛠 Stack Tecnológico
+### **👥 Gestión de Usuarios**  
+- **Clientes**: Pueden buscar herramientas, realizar reservas y gestionar sus alquileres.  
+- **Proveedores**: Administran su inventario, aprueban solicitudes y reciben pagos.  
+- **Administradores**: Supervisan toda la plataforma, gestionan usuarios y generan reportes.  
+
+### **🛠️ Catálogo de Herramientas**  
+- Búsqueda y filtrado de herramientas por categoría, precio y disponibilidad.  
+- Detalles completos de cada herramienta (descripción, precio, calificaciones).  
+
+### **📅 Reservas y Pagos**  
+- Proceso de alquiler con selección de fechas y cantidad.  
+- Integración con pasarelas de pago (simulada en esta versión).  
+- Historial de transacciones y facturación.  
+
+### **📊 Dashboards Interactivos**  
+- **Clientes**: Ven sus reservas activas y próximas devoluciones.  
+- **Proveedores**: Monitorean ingresos, herramientas más rentables y solicitudes pendientes.  
+- **Administradores**: Acceden a métricas globales de la plataforma.  
+
+---
+
+## **🚀 Tecnologías Utilizadas**  
+
+### **Frontend**  
+- **HTML5**, **CSS3** (Flexbox, Grid)  
+- **JavaScript** (manejo del DOM, fetch API)  
+- **Responsive Design** (compatible con móviles y tablets)  
+
+### **Backend**  
+- **Java 17** + **Spring Boot 3** (API RESTful)  
+- **Spring Security** + **JWT** (autenticación)  
+- **PostgreSQL** (base de datos relacional)  
+- **Maven** (gestión de dependencias)  
+
+### **Herramientas Adicionales**  
+- **Git** (control de versiones)  
+- **Postman** (pruebas de API)  
+
+---
+
+## **📌 Beneficios del Sistema**  
+✅ **Ahorro de costos**: Los clientes alquilan herramientas en lugar de comprarlas.  
+✅ **Mayor alcance para proveedores**: Pueden rentabilizar su inventario ocioso.  
+✅ **Gestión centralizada**: Los administradores tienen control total sobre la plataforma.  
+✅ **Experiencia intuitiva**: Interfaz limpia y fácil de usar para todos los roles.  
+
+---
+
+## **🔮 Futuras Mejoras**  
+- Implementar **pagos en línea** con Stripe o PayPal.  
+- Añadir **sistema de reseñas** para herramientas.  
+- Desarrollar una **app móvil** complementaria.  
+- Integrar **notificaciones en tiempo real** con WebSockets.  
+
+---
+
+## **📄 Licencia**  
+Este proyecto está bajo licencia **MIT**.  
+
+---
+
+## **🤝 ¿Cómo Contribuir?**  
+1. Haz un **fork** del repositorio.  
+2. Crea una rama con tu feature: `git checkout -b mi-feature`.  
+3. Haz commit de tus cambios: `git commit -m "Añade nueva funcionalidad"`.  
+4. Haz push a la rama: `git push origin mi-feature`.  
+5. Abre un **Pull Request** y ¡listo!  
+
+---
+
+### **💡 ¿Preguntas o Feedback?**  
+¡Contáctame! ✉️ **tuemail@ejemplo.com**  
+
+--- 
+
+**ConstructTools** no solo simplifica el alquiler de herramientas, sino que también impulsa la productividad en el sector de la construcción. 🚧💡
 
 | Tecnología           | Uso                              |
 |----------------------|----------------------------------|
@@ -50,87 +124,13 @@ src/
 └── test/                               # Pruebas
 ```
 
-## 🔐 Sistema de Autenticación
-
-```java
-// AuthenticationService.java
-public AuthenticationResponse login(AuthenticationRequest authRequest) {
-    Authentication authentication = new UsernamePasswordAuthenticationToken(
-        authRequest.getUsername(), 
-        authRequest.getPassword()
-    );
-    
-    authenticationManager.authenticate(authentication);
-    UserDetails user = userService.findOneByUsername(authRequest.getUsername()).get();
-    String jwt = jwtService.generateToken(user, generateExtraClaims((User) user));
-    
-    return new AuthenticationResponse(jwt);
-}
-```
 
 ### Flujo JWT:
 1. Cliente envía credenciales → `/auth/authenticate`
 2. Servidor valida y retorna JWT
 3. Cliente incluye JWT en header `Authorization: Bearer <token>`
 
-## 🛡️ Configuración de Seguridad
 
-```java
-// HttpSecurityConfig.java
-@Bean
-SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http
-        .csrf(csrf -> csrf.disable())
-        .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authorizeHttpRequests(authReq -> {
-            authReq.requestMatchers(HttpMethod.POST, "/customers").permitAll();
-            authReq.requestMatchers(HttpMethod.POST, "/auth/authenticate").permitAll();
-            authReq.anyRequest().authenticated();
-        })
-        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-    
-    return http.build();
-}
-```
-
-## 📊 Modelo de Datos Principales
-
-### Entidad Usuario
-```java
-@Entity
-@Table(name = "usuarios")
-public class Usuario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idUsuario;
-    
-    private String nombre;
-    private String email;
-    private String password;
-    
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "usuario_roles")
-    private Set<Rol> roles = new HashSet<>();
-}
-```
-
-### Enum de Roles
-```java
-public enum Role {
-    ROLE_ADMINISTRATOR(Arrays.asList(
-        RolePermission.READ_ALL_USERS,
-        RolePermission.CREATE_USER
-    )),
-    ROLE_PROVIDER(Arrays.asList(
-        RolePermission.MANAGE_OWN_TOOLS,
-        RolePermission.ACCEPT_REJECT_BOOKINGS
-    )),
-    ROLE_CUSTOMER(Arrays.asList(
-        RolePermission.SEARCH_TOOLS,
-        RolePermission.BOOK_TOOL
-    ));
-}
-```
 
 ## 🚀 Endpoints Clave
 
@@ -166,57 +166,7 @@ public enum Role {
    jwt.secret=tu_secreto_jwt
    ```
 
-4. **Ejecución**:
-   ```bash
-   mvn spring-boot:run
-   ```
 
-## 📌 Ejemplos de Uso
-
-### Registro de Usuario
-```http
-POST /customers
-Content-Type: application/json
-
-{
-  "firstName": "Juan",
-  "lastName": "Pérez",
-  "email": "juan@ejemplo.com",
-  "password": "Cliente123",
-  "repeatedPassword": "Cliente123",
-  "phone": "5551234567"
-}
-```
-
-### Autenticación
-```http
-POST /auth/authenticate
-Content-Type: application/json
-
-{
-  "username": "juan@ejemplo.com",
-  "password": "Cliente123"
-}
-```
-
-## 🧪 Pruebas
-
-Ejecutar tests con:
-```bash
-mvn test
-```
-
-Cobertura de pruebas:
-```bash
-mvn jacoco:report
-```
-
-## 📈 Roadmap
-
-- [ ] Implementar WebSocket para notificaciones en tiempo real
-- [ ] Añadir integración con Stripe/PayPal
-- [ ] Implementar caché con Redis
-- [ ] Dockerizar la aplicación
 
 ## 🤝 Contribuir
 
@@ -231,10 +181,6 @@ mvn jacoco:report
 MIT © [Adrián Pérez] - **[Contáctame](mailto:tuemail@ejemplo.com)**
 ```
 
----
-
-
-
 3. **Documenta variables de entorno**:
    ```markdown
    | Variable           | Descripción                          | Valor por defecto |
@@ -244,12 +190,3 @@ MIT © [Adrián Pérez] - **[Contáctame](mailto:tuemail@ejemplo.com)**
    | JWT_EXPIRATION    | Tiempo de expiración del token (ms) | 86400000 (24h)    |
    ```
 
-4. **Añade ejemplos de curl**:
-   ```markdown
-   ### Ejemplo cURL
-   ```bash
-   curl -X POST 'http://localhost:8080/auth/authenticate' \
-   -H 'Content-Type: application/json' \
-   -d '{"username":"admin@construct.com","password":"Admin123"}'
-   ```
-   ```
