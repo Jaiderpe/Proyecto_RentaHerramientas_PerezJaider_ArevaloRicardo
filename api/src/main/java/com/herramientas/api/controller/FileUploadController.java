@@ -1,7 +1,5 @@
 package com.herramientas.api.controller;
 
-
-
-public class RolController {
+public class FileUploadController {
 
 }
