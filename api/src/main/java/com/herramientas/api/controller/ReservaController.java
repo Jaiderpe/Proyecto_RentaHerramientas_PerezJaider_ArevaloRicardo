@@ -1,6 +1,7 @@
 package com.herramientas.api.controller;
 
 import com.herramientas.api.application.services.ReservaService;
+import com.herramientas.api.dto.ReservaDto;
 import com.herramientas.api.persistence.entity.Reserva;
 import com.herramientas.api.persistence.entity.User;
 
@@ -10,6 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/reservas")
