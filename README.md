@@ -176,16 +176,63 @@ src/
 4. Haz push: `git push origin feature/nueva-funcionalidad`
 5. Abre un Pull Request
 
-## 📄 Licencia
 
-https://github.com/RicardoArevaloB/Frontend_RentaHerramientas_PerezJaider_ArevaloRicardo
-MIT © [Adrián Pérez] - **[Contáctame](mailto:tuemail@ejemplo.com)**
+
+## 📥 Scripts y Pruebas con Postman
+
+### 🛠️ Base de Datos PostgreSQL
+
+#### 2. Conectarse a la base de datos
+```bash
+psql -U postgres
+\c renttools
 ```
 
-3. **Documenta variables de entorno**:
-   ```markdown
-   | Variable           | Descripción                          | Valor por defecto |
-   |--------------------|--------------------------------------|-------------------|
+#### 3. Ejecutar los scripts
+```sql
+\postgres scripts.sql
+\postgres inserts.sql
+```
+
+> Asegúrate de tener los archivos SQL en la carpeta `db/` del proyecto.
+
+---
+
+### 🧪 Colección de Postman
+
+#### 1. Importar la colección
+1. Abre Postman.
+2. Ve a **Collections** > **Import**.
+3. Selecciona el archivo `RentTools_Postman_Collection_FULL_FINAL.json` dentro de la carpeta `postman/`.
+
+#### 2. Usuarios disponibles
+
+| Rol        | Email                  | Contraseña |
+|------------|------------------------|------------|
+| Admin      | admin@example.com      | 12345678   |
+| Cliente    | cliente@example.com    | 12345678   |
+| Proveedor  | proveedor@example.com  | 12345678   |
+
+#### 3. Uso
+- Ejecuta primero la petición de login según el usuario.
+- Copia el token JWT del resultado.
+- Pega el token en la variable `{{token}}` o en el header `Authorization` como:  
+  `Bearer <tu_token>`
+
+> También puedes definir la variable `token` en la sección Variables de la colección para mayor comodidad.
+
+---
+
+📁 Estructura recomendada del proyecto para estos archivos:
+
+```
+renttools-resourses/
+├── db/
+│   ├── postgres scripts.sql
+│   └── postgres inserts.sql
+├── postman/
+│   └── RentTools Postman Collection.json
+```
    | DB_URL             | URL de la base de datos              | localhost:5432    |
    | JWT_SECRET         | Secreto para firmar JWT              | -                 |
    | JWT_EXPIRATION    | Tiempo de expiración del token (ms) | 86400000 (24h)    |
