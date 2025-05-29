@@ -10,4 +10,6 @@ import com.herramientas.api.persistence.entity.User;
 public interface HerramientaRepository extends JpaRepository<Herramienta, Integer> {
     List<Herramienta> findByProveedor(User proveedor);
     List<Herramienta> findByCategorias_IdCategoria(Integer idCategoria);
+    List<Herramienta> findByDisponibleTrue();
+
 }

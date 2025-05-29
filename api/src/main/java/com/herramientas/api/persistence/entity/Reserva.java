@@ -3,12 +3,13 @@ package com.herramientas.api.persistence.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import com.herramientas.api.persistence.utils.EstadoReserva;
 
 @Entity
 @Table(name = "reservas")
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -16,7 +17,7 @@ public class Reserva {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idReserva;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "id_herramienta")
@@ -28,10 +29,7 @@ public class Reserva {
 
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
-
-    @Enumerated(EnumType.STRING)
-    private EstadoReserva estado;
-
-    private String observaciones;
+    private String estado; // PENDIENTE, ACEPTADA, RECHAZADA, FINALIZADA
+    private BigDecimal monto;
 }
 

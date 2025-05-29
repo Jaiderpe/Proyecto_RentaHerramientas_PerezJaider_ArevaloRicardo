@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 @Service
 public class HerramientaService {
 
@@ -34,4 +33,9 @@ public class HerramientaService {
     public List<Herramienta> findByCategoria(Integer idCategoria) {
         return herramientaRepository.findByCategorias_IdCategoria(idCategoria);
     }
+
+    public List<Herramienta> findDisponibles() {
+        return herramientaRepository.findByDisponibleTrue();
+    }
+    
 }

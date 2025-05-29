@@ -1,0 +1,337 @@
+{
+  "info": {
+    "name": "RentTools API - Colecci\u00f3n Completa",
+    "_postman_id": "12345678-1234-5678-1234-567812345678",
+    "description": "Colecci\u00f3n completa de endpoints del backend RentTools para pruebas en Postman.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "\ud83d\udcdd Notas sobre datos insertados",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost"
+        },
+        "description": "\n# ID Cliente insertado: 1\n# ID Proveedor insertado: 2\n# Herramientas insertadas: \n#   1 -> Taladro Bosch\n#   2 -> Sierra Circular Makita\n# Categor\u00edas: El\u00e9ctrico (1), Construcci\u00f3n (2), Jardiner\u00eda (3)\n"
+      }
+    },
+    {
+      "name": "Autenticaci\u00f3n - Login Admin",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"admin@example.com\",\n  \"password\": \"12345678\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/auth/authenticate",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auth",
+            "authenticate"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Autenticaci\u00f3n - Login Cliente",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"cliente@example.com\",\n  \"password\": \"12345678\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/auth/authenticate",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auth",
+            "authenticate"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Autenticaci\u00f3n - Login Proveedor",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"proveedor@example.com\",\n  \"password\": \"12345678\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/auth/authenticate",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auth",
+            "authenticate"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Autenticaci\u00f3n - Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"cliente@example.com\",\n  \"password\": \"12345678\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/auth/authenticate",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auth",
+            "authenticate"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Validar JWT",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/auth/validate-token?jwt=TOKEN_AQUI",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auth",
+            "validate-token"
+          ],
+          "query": [
+            {
+              "key": "jwt",
+              "value": "TOKEN_AQUI"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Cat\u00e1logo - Herramientas disponibles (cliente)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/cliente/catalogo",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "cliente",
+            "catalogo"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Reservas - Crear reserva (cliente)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"herramienta\": {\n    \"idHerramienta\": 1\n  },\n  \"fechaInicio\": \"2025-06-01\",\n  \"fechaFin\": \"2025-06-04\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/cliente/reservas",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "cliente",
+            "reservas"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Reservas - Ver mis reservas (cliente)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/cliente/reservas",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "cliente",
+            "reservas"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Admin - Obtener todos los usuarios",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/admin/users",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "admin",
+            "users"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Admin - Crear nuevo usuario",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstName\": \"Nuevo\",\n  \"lastName\": \"Usuario\",\n  \"email\": \"nuevo@email.com\",\n  \"password\": \"123456\",\n  \"role\": \"ROLE_CUSTOMER\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/admin/users",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "admin",
+            "users"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Proveedor - Crear herramienta",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombre\": \"Nueva Herramienta\",\n  \"descripcion\": \"Descripci\\u00f3n\",\n  \"precioPorDia\": 50,\n  \"disponible\": true,\n  \"estado\": \"NUEVO\",\n  \"imagenUrl\": \"https://imagen.com\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/herramientas",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "herramientas"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Proveedor - Ver mis herramientas",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8080/api/herramientas/mis-herramientas",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "herramientas",
+            "mis-herramientas"
+          ]
+        }
+      }
+    }
+  ]
+}

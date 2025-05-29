@@ -12,5 +12,4 @@ public class ReservaDto {
     private String herramientaNombre;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
-    private String estado;
 }
